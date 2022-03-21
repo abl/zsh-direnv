@@ -58,8 +58,9 @@ _zsh_direnv_download_install() {
         return 1
       ;;
     esac
+    # if on Darwin, trim $OSTYPE to match the direnv release
     [[ "$OSTYPE" == "darwin"* ]] && local OSTYPE=darwin
-    _zsh_direnv_log $NONE "blue" "  -> download and install direnv.${OSTYPE%-*}-${machine} ${version}"
+    _zsh_direnv_log $NONE "blue" "  -> download and install direnv ${version}"
     curl -o "${DIRENV_HOME}/direnv" -fsSL https://github.com/direnv/direnv/releases/download/${version}/direnv.${OSTYPE%-*}-${machine}
     chmod +x "${DIRENV_HOME}/direnv"
     echo ${version} > ${ZSH_DIRENV_VERSION_FILE}
